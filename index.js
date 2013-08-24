@@ -30,13 +30,14 @@ module.exports = function () {
     } else if (buf === 13) {
       split = next === 10 ? ++end : end
     }
+
     if (split > -1) {
       stream.push(chunk.slice(start, end))
       start = end
-      if (start < chunk.length) {
-        extra = chunk.slice(start, chunk.length)
-      }
     }
+
+    extra = chunk.slice(start, chunk.length)
+
     if (end < chunk.length) {
       push(chunk, buf, start, end)
     }
