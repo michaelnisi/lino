@@ -1,5 +1,5 @@
 {
-  "name": "lines",
+  "name": "lino",
   "version": "0.0.1",
   "description": "transform stream to line sized chunks",
   "main": "index.js",
@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.michaelnisi.com/lines"
+    "url": "git://github.michaelnisi.com/lino"
   },
   "keywords": [
     "transform",
-    "lines",
+    "lino",
     "stream"
   ],
   "author": "Michael Nisi",

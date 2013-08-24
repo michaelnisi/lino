@@ -1,5 +1,5 @@
 
-// lines - transform to line sized chunks
+// lino - transform to line sized chunks
 
 var Transform = require('stream').Transform
 
