@@ -3,8 +3,8 @@ var test = require('tap').test
   , fs = require('fs')
   , lines = require('../')
 
-test('hello', function (t) {
-  var reader = fs.createReadStream('hello.txt')
+test('basic things (non-flowing)', function (t) {
+  var reader = fs.createReadStream('simple.txt')
     , transform = lines()
 
   var actual = []
@@ -25,8 +25,7 @@ test('hello', function (t) {
   transform.on('end', function () {
     t.equal(actual.length, 5, 'should be 5 lines')
     expected.forEach(function (chunk, i) {
-      t.equal(actual[i].toString(), chunk.toString(), '')
-      // TODO: compare buffers not strings
+      t.same(actual[i], chunk, '')
     })
     t.end()
   })

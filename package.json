@@ -1,7 +1,7 @@
 {
   "name": "lines",
-  "version": "0.0.0",
-  "description": "transform to line sized chunks",
+  "version": "0.0.1",
+  "description": "transform stream to line sized chunks",
   "main": "index.js",
   "directories": {
     "example": "example",
@@ -20,5 +20,5 @@
     "stream"
   ],
   "author": "Michael Nisi",
-  "license": "BSD-2-Clause"
+  "license": "MIT"
 }

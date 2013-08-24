@@ -7,24 +7,28 @@ module.exports = function () {
   var stream = new Transform()
 
   stream._transform = function (chunk, enc, cb) {
-    lines(chunk, null, 0, 0)
+    push(chunk, null, 0, 0)
     cb()
   }
 
-  function lines (chunk, prev, start, end) {
+  function push (chunk, prev, start, end) {
     var split = -1
-      , oct = chunk[end++]
+      , buf = chunk[end++]
+      , next = chunk[end+1]
 
-    if (oct === 10) {
+    if (buf === 10) {
       split = end
+    } else if (buf === 13) {
+      split = next === 10 ? ++end : end
     }
+
     if (split > -1) {
       var line = chunk.slice(start, end)
       stream.push(line)
       start = end
     }
     if (end < chunk.length) {
-      lines(chunk, oct, start, end)
+      push(chunk, buf, start, end)
     }
   }
 
