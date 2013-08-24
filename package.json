@@ -1,7 +1,7 @@
 {
   "name": "lino",
-  "version": "0.0.1",
-  "description": "transform stream to line sized chunks",
+  "version": "0.0.2",
+  "description": "split stream into line sized chunks",
   "main": "index.js",
   "directories": {
     "example": "example",
@@ -19,6 +19,16 @@
     "lino",
     "stream"
   ],
-  "author": "Michael Nisi",
+  "devDependencies": {
+    "tap": "0.4.x"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "author": {
+    "name": "Michael Nisi",
+    "email": "michael.nisi@gmail.com",
+    "url": "http://michaelnisi.com"
+  },
   "license": "MIT"
 }

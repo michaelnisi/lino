@@ -5,9 +5,18 @@ var Transform = require('stream').Transform
 
 module.exports = function () {
   var stream = new Transform()
+    , extra = null
 
   stream._transform = function (chunk, enc, cb) {
-    push(chunk, null, 0, 0)
+    var buf
+    if (extra) {
+      var len = extra.length + chunk.length
+      buf = Buffer.concat([extra, chunk], len)
+      extra = null
+    } else {
+      buf = chunk
+    }
+    push(buf, null, 0, 0)
     cb()
   }
 
@@ -21,11 +30,12 @@ module.exports = function () {
     } else if (buf === 13) {
       split = next === 10 ? ++end : end
     }
-
     if (split > -1) {
-      var line = chunk.slice(start, end)
-      stream.push(line)
+      stream.push(chunk.slice(start, end))
       start = end
+      if (start < chunk.length) {
+        extra = chunk.slice(start, chunk.length)
+      }
     }
     if (end < chunk.length) {
       push(chunk, buf, start, end)

@@ -1,4 +1,4 @@
-# lino - transform stream to line sized chunks
+# lino - split stream into line sized chunks
 
 The lino [Node.js](http://nodejs.org/) module splits streams into line sized chunks.
 
