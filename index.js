@@ -8,15 +8,15 @@ module.exports = function () {
     , extra = null
 
   stream._transform = function (chunk, enc, cb) {
-    var buf
+    var con
     if (extra) {
       var len = extra.length + chunk.length
-      buf = Buffer.concat([extra, chunk], len)
+      con = Buffer.concat([extra, chunk], len)
       extra = null
     } else {
-      buf = chunk
+      con = chunk
     }
-    push(buf, null, 0, 0)
+    push(con, null, 0, 0)
     cb()
   }
 
