@@ -1,15 +1,25 @@
 
 var test = require('tap').test
   , fs = require('fs')
-  , lines = require('../')
+  , es = require('event-stream')
+  , lino = require('../')
+
+test('lc', function (t) {
+  fs.createReadStream('manifesto.txt')
+    .pipe(lino())
+    .pipe(es.writeArray(function (er, lines) {
+      t.equal(lines.length, 46, 'should be 46 lines')
+      t.end()
+    }))
+})
 
 test('size', function (t) {
-  var reader = fs.createReadStream('simple.txt')
-    , transform = lines()
+  var reader = fs.createReadStream('five.txt')
+    , transform = lino()
 
   reader.on('readable', function () {
     var chunk
-      , size = 4
+      , size = Math.ceil(Math.random() * 64)
     while (null !== (chunk = reader.read(size))) {
       transform.write(chunk)
     }
@@ -23,7 +33,6 @@ test('size', function (t) {
   , new Buffer('FIVE\n')
   ]
   reader.on('end', function () {
-    t.equal(actual.length, 5, 'should be 5 lines')
     expected.forEach(function (chunk, i) {
       t.same(actual[i], chunk, '')
     })

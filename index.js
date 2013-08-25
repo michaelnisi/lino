@@ -16,11 +16,11 @@ module.exports = function () {
     } else {
       con = chunk
     }
-    push(con, null, 0, 0)
+    push(con, 0, 0)
     cb()
   }
 
-  function push (chunk, prev, start, end) {
+  function push (chunk, start, end) {
     var split = -1
       , buf = chunk[end++]
       , next = chunk[end+1]
@@ -35,11 +35,9 @@ module.exports = function () {
       stream.push(chunk.slice(start, end))
       start = end
     }
-
     extra = chunk.slice(start, chunk.length)
-
     if (end < chunk.length) {
-      push(chunk, buf, start, end)
+      push(chunk, start, end)
     }
   }
 
