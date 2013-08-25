@@ -23,7 +23,7 @@ The `lino` module exports a single function that returns a [Transform](http://no
 
 Install with [npm](https://npmjs.org):
 
-    npm install -g lino
+    npm install lino
 
 [![NPM](https://nodei.co/npm/lino.png)](https://npmjs.org/package/lino)
 
