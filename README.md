@@ -5,15 +5,13 @@ The lino [Node.js](http://nodejs.org/) module splits streams into line sized chu
 [![Build Status](https://secure.travis-ci.org/michaelnisi/lino.png)](http://travis-ci.org/michaelnisi/lino) [![David DM](https://david-dm.org/michaelnisi/lino.png)](http://david-dm.org/michaelnisi/lino)
 
 ## Usage
-
+    
     var lino = require('lino')
-        fs = require('fs')
+      , fs = require('fs')
 
-    var reader = fs.createReadStream('./LICENSE')
-      , transformer = lino()
-      , writer = process.stdout
-
-    reader.pipe(transformer).pipe(writer)
+    fs.createReadStream('./LICENSE')
+      .pipe(lino())
+      .pipe(process.stdout)
 
 ### lino()
 
