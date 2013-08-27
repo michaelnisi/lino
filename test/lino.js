@@ -3,7 +3,6 @@ var test = require('tap').test
   , fs = require('fs')
   , es = require('event-stream')
   , lino = require('../')
-  , Randstream = require('randstream')
 
 test('lc', function (t) {
   fs.createReadStream('manifesto.txt')
