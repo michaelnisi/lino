@@ -4,6 +4,6 @@
 var lino = require('../')
   , fs = require('fs')
 
-fs.createReadStream('./LICENSE')
+fs.createReadStream('./test/manifesto.txt')
   .pipe(lino())
   .pipe(process.stdout)

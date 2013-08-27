@@ -16,29 +16,29 @@ module.exports = function () {
     } else {
       con = chunk
     }
-    push(con, 0, 0)
-    cb()
+    push(con, cb)()
   }
 
-  function push (chunk, start, end) {
-    var split = -1
-      , buf = chunk[end++]
-      , next = chunk[end+1]
+  function push (chunk, cb) {
+    var start = end = 0
+    while (end < chunk.length) {
+      var split = -1
+        , buf = chunk[end++]
+        , next = chunk[end+1]
 
-    if (buf === 10) {
-      split = end
-    } else if (buf === 13) {
-      split = next === 10 ? ++end : end
-    }
+      if (buf === 10) {
+        split = end
+      } else if (buf === 13) {
+        split = next === 10 ? ++end : end
+      }
 
-    if (split > -1) {
-      stream.push(chunk.slice(start, end))
-      start = end
+      if (split > -1) {
+        stream.push(chunk.slice(start, end))
+        start = end
+      }
+      extra = chunk.slice(start, chunk.length)
     }
-    extra = chunk.slice(start, chunk.length)
-    if (end < chunk.length) {
-      push(chunk, start, end)
-    }
+    return cb
   }
 
   return stream

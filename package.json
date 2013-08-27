@@ -1,6 +1,6 @@
 {
   "name": "lino",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "split stream into line sized chunks",
   "main": "index.js",
   "directories": {
@@ -15,9 +15,13 @@
     "url": "git://github.michaelnisi.com/lino"
   },
   "keywords": [
-    "transform",
-    "lino",
-    "stream"
+    "split",
+    "stream",
+    "lines",
+    "line",
+    "by",
+    "separated",
+    "transform"
   ],
   "devDependencies": {
     "tap": "0.4.x",

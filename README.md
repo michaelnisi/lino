@@ -9,13 +9,13 @@ The lino [Node.js](http://nodejs.org/) module splits streams into line sized chu
     var lino = require('lino')
       , fs = require('fs')
 
-    fs.createReadStream('./LICENSE')
+    fs.createReadStream('./README.md')
       .pipe(lino())
       .pipe(process.stdout)
 
 ### lino()
 
-The `lino` module exports a single function that returns a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream.
+The `lino` module exports a single function that returns a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream that outputs lines.
 
 ## Installation
 

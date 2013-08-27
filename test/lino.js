@@ -48,4 +48,11 @@ test('size', function (t) {
   })
 })
 
-
+test('overflow', function (t) {
+  fs.createReadStream('rfc2616.txt')
+    .pipe(lino())
+    .on('end', function () {
+      t.end()
+    })
+    .resume()
+})
