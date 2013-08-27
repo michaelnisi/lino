@@ -3,6 +3,7 @@ var test = require('tap').test
   , fs = require('fs')
   , es = require('event-stream')
   , lino = require('../')
+  , Randstream = require('randstream')
 
 test('lc', function (t) {
   fs.createReadStream('manifesto.txt')
@@ -52,7 +53,15 @@ test('overflow', function (t) {
   fs.createReadStream('rfc2616.txt')
     .pipe(lino())
     .on('end', function () {
+      t.ok(true, 'should be fine')
       t.end()
     })
     .resume()
+})
+
+test('none', function (t) {
+  lino().end('nada', 'utf8', function () {
+    t.ok(true, 'de nada')
+    t.end()
+  })
 })

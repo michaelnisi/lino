@@ -15,7 +15,7 @@ The lino [Node.js](http://nodejs.org/) module splits streams into line sized chu
 
 ### lino()
 
-The `lino` module exports a single function that returns a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream that outputs lines.
+The `lino` module exports a single function that returns a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream that outputs data in line sized chunks.
 
 ## Installation
 
