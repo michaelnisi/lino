@@ -16,15 +16,12 @@ module.exports = function () {
     } else {
       con = chunk
     }
-    push(con, cb)()
-  }
 
-  function push (chunk, cb) {
     var start = end = 0
-    while (end < chunk.length) {
+    while (end < con.length) {
       var split = -1
-        , buf = chunk[end++]
-        , next = chunk[end+1]
+        , buf = con[end++]
+        , next = con[end+1]
 
       if (buf === 10) {
         split = end
@@ -33,12 +30,19 @@ module.exports = function () {
       }
 
       if (split > -1) {
-        stream.push(chunk.slice(start, end))
+        stream.push(con.slice(start, end))
         start = end
       }
-      extra = chunk.slice(start, chunk.length)
+      extra = con.slice(start, con.length)
     }
-    return cb
+    cb()
+  }
+
+  stream._flush = function (cb) {
+    if (extra) {
+      stream.push(extra)
+    }
+    cb()
   }
 
   return stream
