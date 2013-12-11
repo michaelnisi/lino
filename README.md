@@ -13,6 +13,8 @@ fs.createReadStream('./README.md')
   .pipe(lino())
   .pipe(process.stdout)
 ```
+## API
+
 ### lino()
 
 `lino` exports a single function that returns a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream. This duplex stream splits its inputs at line breaks to output line sized chunks.
