@@ -1,6 +1,6 @@
 {
   "name": "lino",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "split stream into line sized chunks",
   "main": "index.js",
   "directories": {
@@ -31,8 +31,7 @@
     "event-stream": "3.0.x"
   },
   "engines": {
-    "node": "0.10.x",
-    "node": "0.11.x"
+    "node": ">=0.10"
   },
   "author": {
     "name": "Michael Nisi",
