@@ -1,6 +1,6 @@
 {
   "name": "lino",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "split stream into line sized chunks",
   "main": "index.js",
   "directories": {
@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap --tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -31,8 +31,8 @@
     "event-stream": "3.0.x"
   },
   "engines": {
-    "node": "0.10.x"
-  , "node": "0.11.x"
+    "node": "0.10.x",
+    "node": "0.11.x"
   },
   "author": {
     "name": "Michael Nisi",

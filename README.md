@@ -15,7 +15,9 @@ fs.createReadStream('./README.md')
 ```
 ## API
 
-### lino()
+### lino(opts)
+
+- opts Object Passed to both [Writable](http://nodejs.org/api/stream.html#stream_class_stream_writable) and [Readable](http://nodejs.org/api/stream.html#stream_class_stream_readable) constructors.
 
 `lino` exports a single function that returns a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream. This duplex stream splits its inputs at line breaks to output line sized chunks.
 
