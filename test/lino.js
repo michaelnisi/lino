@@ -3,7 +3,13 @@ var test = require('tap').test
   , fs = require('fs')
   , es = require('event-stream')
   , StringDecoder = require('string_decoder').StringDecoder
+  , stream = require('stream')
   , lino = require('../')
+
+test('constructor', function (t) {
+  t.ok(lino() instanceof stream.Transform)
+  t.end()
+})
 
 test('lc', function (t) {
   fs.createReadStream('manifesto.txt')
