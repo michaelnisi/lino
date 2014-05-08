@@ -13,35 +13,34 @@ function Lino (opts) {
 util.inherits(Lino, stream.Transform)
 
 Lino.prototype._transform = function (chunk, enc, cb) {
-  var con
+  var cat
     , extra = this.extra
   if (extra) {
     var len = extra.length + chunk.length
-    con = Buffer.concat([extra, chunk], len)
+    cat = Buffer.concat([extra, chunk], len)
     extra = null
   } else {
-    con = chunk
+    cat = chunk
   }
 
   var start = end = 0
-  while (end < con.length) {
-    var split = -1
-      , buf = con[end++]
-      , next = con[end+1]
-
-    if (buf === 10) {
+    , split
+    , buf
+    , line
+    , count = 0
+  while (end < cat.length) {
+    split = -1
+    buf = cat[end++]
+    if (buf === 10) { // POSIX only
       split = end
-    } else if (buf === 13) {
-      split = next === 10 ? ++end : end
     }
-
     if (split > -1) {
-      this.push(con.slice(start, end))
+      line = cat.slice(start, end)
+      this.push(line)
       start = end
     }
-    extra = con.slice(start, con.length)
   }
-  this.extra = extra
+  this.extra = cat.slice(start)
   cb()
 }
 

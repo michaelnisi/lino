@@ -11,6 +11,22 @@ test('constructor', function (t) {
   t.end()
 })
 
+test('line count', function (t) {
+  t.plan(1)
+  var actual = 0
+    , expected = 9859 // wc -l test/rfc2616.txt
+  fs.createReadStream('rfc2616.txt')
+    .pipe(lino())
+    .on('data', function (chunk) {
+      actual++
+    })
+    .on('end', function () {
+      t.is(actual, expected)
+      t.end()
+    })
+    .resume()
+})
+
 test('lc', function (t) {
   fs.createReadStream('manifesto.txt')
     .pipe(lino())
@@ -55,15 +71,10 @@ test('size', function (t) {
   })
 })
 
-test('overflow', function (t) {
-  fs.createReadStream('rfc2616.txt')
-    .pipe(lino())
-    .on('end', function () {
-      t.ok(true, 'should be fine')
-      t.end()
-    })
-    .resume()
-})
+
+var StringDecoder = require('string_decoder').StringDecoder
+  , child_process = require('child_process')
+
 
 test('none', function (t) {
   var trans = lino()
