@@ -1,16 +1,15 @@
 
+
 var test = require('tap').test
-  , fs = require('fs')
   , parse = require('./parse')
 
 function input () {
-  return '?? test/parse.js\n?? test/porcelain\n'
+  return 'No new line'
 }
 
 function wanted () {
   return [
-    '?? test/parse.js\n'
-  , '?? test/porcelain\n'
+    'No new line'
   ]
 }
 

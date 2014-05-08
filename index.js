@@ -27,7 +27,6 @@ Lino.prototype._transform = function (chunk, enc, cb) {
     , split
     , buf
     , line
-    , count = 0
   while (end < cat.length) {
     split = -1
     buf = cat[end++]

@@ -1,9 +1,12 @@
 
-// example - pipe file to stdout
+// example - buffer line
 
-var lino = require('../')
-  , fs = require('fs')
+var lino = require('../'), lines
 
-fs.createReadStream('./test/manifesto.txt')
-  .pipe(lino())
-  .pipe(process.stdout)
+lines = lino()
+lines.on('readable', function () {
+  console.log('%s', lines.read())
+})
+lines.write('My philosophy, ')
+lines.write('like color television, ')
+lines.write('is all there in black and white.\n')
