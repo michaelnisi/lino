@@ -1,27 +1,27 @@
 
 var util = require('util')
   , lino = require('../')
-  , events = ['data', 'error', 'feed']
+  , assert = require('assert')
+
+function opts () {
+  return { encoding:'utf8' }
+}
 
 module.exports = function (t, input, wanted) {
-  var parser = lino()
-    , e = 0
-  events.forEach(function (ev) {
-    parser.on(ev, function (n) {
-      if (process.env.DEBUG) {
-        console.error({ wanted: wanted[e], found: [ev, n] })
-      }
-      if (e >= wanted.length && (ev === 'end' || ev === 'ready')) {
-        t.end()
-        return
-      }
-      t.ok( e < wanted.length)
-      var inspected = n instanceof Error ? '\n' + n.message : util.inspect(n)
-      t.is(ev, wanted[e][0])
-      if (ev === 'error') t.is(n.message, wanted[e][1])
-      else t.deepEqual(n, wanted[e][1])
-      e++
-    })
+  var parser = lino(opts())
+    , actual = []
+    , n = 0
+  parser.on('readable', function () {
+    var chunk
+    while (null !== (chunk = parser.read())) {
+      t.is(chunk, wanted[n++])
+      actual.push(chunk)
+    }
   })
-  if (input) parser.write(input)
+  parser.on('end', function () {
+    t.deepEqual(actual, wanted)
+    t.end()
+  })
+  parser.write(input)
+  parser.end()
 }

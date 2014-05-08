@@ -27,15 +27,6 @@ test('line count', function (t) {
     .resume()
 })
 
-test('lc', function (t) {
-  fs.createReadStream('manifesto.txt')
-    .pipe(lino())
-    .pipe(es.writeArray(function (er, lines) {
-      t.equal(lines.length, 46, 'should be 46 lines')
-      t.end()
-    }))
-})
-
 test('size', function (t) {
   var reader = fs.createReadStream('five.txt')
     , transform = lino()
@@ -71,29 +62,23 @@ test('size', function (t) {
   })
 })
 
-
 var StringDecoder = require('string_decoder').StringDecoder
-  , child_process = require('child_process')
-
 
 test('none', function (t) {
   var trans = lino()
     , expected = 'Não sou nada.'
     , actual = []
-
+    , decoder = new StringDecoder()
   trans.on('readable', function () {
     var chunk;
     while (null !== (chunk = trans.read())) {
-      actual.push(dec(chunk))
+      actual.push(decoder.write(chunk))
     }
   }).on('finish', function () {
+    t.ok(!decoder.end())
     t.same(actual.join(), expected)
     t.end()
   })
   trans.end(expected)
 })
 
-var decoder = new StringDecoder('utf8')
-function dec(buf) {
-  return decoder.write(buf)
-}

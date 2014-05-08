@@ -1,20 +1,19 @@
 
 var test = require('tap').test
   , fs = require('fs')
-  , lino = require('../')
+  , parse = require('./parse')
 
-test('explore', function (t) {
-  var f = lino()
-    , count = 0
-  f.on('readable', function () {
-    var chunk
-    while (null !== (chunk = f.read())) {
-      // console.error('line %s: %s', ++count, chunk)
-    }
-  })
-  f.on('end', function () {
-    t.end()
-  })
-  f.write(fs.readFileSync('porcelain'))
-  f.end()
+function input () {
+  return '?? test/parse.js\n?? test/porcelain\n'
+}
+
+function wanted () {
+  return [
+    '?? test/parse.js\n'
+  , '?? test/porcelain\n'
+  ]
+}
+
+test('porcelain', function (t) {
+  parse(t, input(), wanted())
 })
