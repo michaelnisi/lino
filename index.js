@@ -1,10 +1,9 @@
-
 // lino - split stream into line sized chunks
 
 module.exports = Lino
 
-var stream = require('stream')
-  , util = require('util')
+var stream = require('readable-stream')
+var util = require('util')
 
 function Lino (opts) {
   if (!(this instanceof Lino)) return new Lino(opts)
@@ -14,7 +13,7 @@ util.inherits(Lino, stream.Transform)
 
 Lino.prototype._transform = function (chunk, enc, cb) {
   var cat
-    , extra = this.extra
+  var extra = this.extra
   if (extra) {
     var len = extra.length + chunk.length
     cat = Buffer.concat([extra, chunk], len)
@@ -23,10 +22,11 @@ Lino.prototype._transform = function (chunk, enc, cb) {
     cat = chunk
   }
 
-  var start = end = 0
-    , split
-    , buf
-    , line
+  var start = 0
+  var end = 0
+  var split
+  var buf
+  var line
   while (end < cat.length) {
     split = -1
     buf = cat[end++]

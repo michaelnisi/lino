@@ -2,14 +2,15 @@
 
 The lino [Node.js](http://nodejs.org/) module splits streams into line sized chunks.
 
-[![Build Status](https://secure.travis-ci.org/michaelnisi/lino.png)](http://travis-ci.org/michaelnisi/lino)
+[![Build Status](https://secure.travis-ci.org/michaelnisi/lino.svg)](http://travis-ci.org/michaelnisi/lino)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 ## Usage
 
-```js    
-var lino = require('lino'), lines
+```js
+var lino = require('lino')
 
-lines = lino()
+var lines = lino()
 lines.on('readable', function () {
   console.log('%s', lines.read())
 })

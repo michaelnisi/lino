@@ -1,7 +1,7 @@
-
 // example - buffer line
 
-var lino = require('../'), lines
+var lino = require('../')
+var lines
 
 lines = lino()
 lines.on('readable', function () {

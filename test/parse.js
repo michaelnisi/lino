@@ -1,19 +1,16 @@
-
-var util = require('util')
-  , lino = require('../')
-  , assert = require('assert')
+var lino = require('../')
 
 function opts () {
-  return { encoding:'utf8' }
+  return { encoding: 'utf8' }
 }
 
 module.exports = function (t, input, wanted) {
   var parser = lino(opts())
-    , actual = []
-    , n = 0
+  var actual = []
+  var n = 0
   parser.on('readable', function () {
     var chunk
-    while (null !== (chunk = parser.read())) {
+    while ((chunk = parser.read()) !== null) {
       t.is(chunk, wanted[n++])
       actual.push(chunk)
     }

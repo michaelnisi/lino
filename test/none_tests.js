@@ -1,7 +1,5 @@
-
-
 var test = require('tap').test
-  , parse = require('./parse')
+var parse = require('./parse')
 
 function input () {
   return 'No new line'

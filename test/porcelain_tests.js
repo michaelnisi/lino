@@ -1,6 +1,5 @@
-
 var test = require('tap').test
-  , parse = require('./parse')
+var parse = require('./parse')
 
 function input () {
   return '?? test/parse.js\n?? test/porcelain\n'
@@ -8,8 +7,8 @@ function input () {
 
 function wanted () {
   return [
-    '?? test/parse.js\n'
-  , '?? test/porcelain\n'
+    '?? test/parse.js\n',
+    '?? test/porcelain\n'
   ]
 }
 

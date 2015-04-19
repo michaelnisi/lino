@@ -1,10 +1,8 @@
-
 var test = require('tap').test
-  , fs = require('fs')
-  , es = require('event-stream')
-  , StringDecoder = require('string_decoder').StringDecoder
-  , stream = require('stream')
-  , lino = require('../')
+var fs = require('fs')
+var StringDecoder = require('string_decoder').StringDecoder
+var stream = require('readable-stream')
+var lino = require('../')
 
 test('constructor', function (t) {
   t.ok(lino() instanceof stream.Transform)
@@ -14,7 +12,7 @@ test('constructor', function (t) {
 test('line count', function (t) {
   t.plan(1)
   var actual = 0
-    , expected = 9859 // wc -l test/rfc2616.txt
+  var expected = 9859 // wc -l test/rfc2616.txt
   fs.createReadStream('rfc2616.txt')
     .pipe(lino())
     .on('data', function (chunk) {
@@ -29,22 +27,22 @@ test('line count', function (t) {
 
 test('size', function (t) {
   var reader = fs.createReadStream('five.txt')
-    , transform = lino()
+  var transform = lino()
 
   reader.on('readable', function () {
     var chunk
-      , size = Math.ceil(Math.random() * 64)
-    while (null !== (chunk = reader.read(size))) {
+    var size = Math.ceil(Math.random() * 64)
+    while ((chunk = reader.read(size)) !== null) {
       transform.write(chunk)
     }
   })
 
   var expected = [
-    new Buffer('ONE\n')
-  , new Buffer('TWO\n')
-  , new Buffer('THREE\n')
-  , new Buffer('FOUR\n')
-  , new Buffer('FIVE\n')
+    new Buffer('ONE\n'),
+    new Buffer('TWO\n'),
+    new Buffer('THREE\n'),
+    new Buffer('FOUR\n'),
+    new Buffer('FIVE\n')
   ]
   reader.on('end', function () {
     expected.forEach(function (chunk, i) {
@@ -56,7 +54,7 @@ test('size', function (t) {
   var actual = []
   transform.on('readable', function () {
     var chunk
-    while (null !== (chunk = transform.read())) {
+    while ((chunk = transform.read()) !== null) {
       actual.push(chunk)
     }
   })
@@ -66,12 +64,12 @@ var StringDecoder = require('string_decoder').StringDecoder
 
 test('none', function (t) {
   var trans = lino()
-    , expected = 'Não sou nada.'
-    , actual = []
-    , decoder = new StringDecoder()
+  var expected = 'Não sou nada.'
+  var actual = []
+  var decoder = new StringDecoder()
   trans.on('readable', function () {
-    var chunk;
-    while (null !== (chunk = trans.read())) {
+    var chunk
+    while ((chunk = trans.read()) !== null) {
       actual.push(decoder.write(chunk))
     }
   }).on('finish', function () {
@@ -81,4 +79,3 @@ test('none', function (t) {
   })
   trans.end(expected)
 })
-
