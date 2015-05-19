@@ -11,7 +11,7 @@ function Lino (opts) {
 }
 util.inherits(Lino, stream.Transform)
 
-Lino.prototype._transform = function (chunk, enc, cb) {
+Lino.prototype._transform = function _transform (chunk, enc, cb) {
   var cat
   var extra = this.extra
   if (extra) {
@@ -43,7 +43,7 @@ Lino.prototype._transform = function (chunk, enc, cb) {
   cb()
 }
 
-Lino.prototype._flush = function (cb) {
+Lino.prototype._flush = function _flush (cb) {
   var extra = this.extra
   if (extra) {
     this.push(extra)

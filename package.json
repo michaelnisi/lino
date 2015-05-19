@@ -1,6 +1,6 @@
 {
   "name": "lino",
-  "version": "0.1.6",
+  "version": "1.0.0",
   "description": "split stream into line sized chunks",
   "main": "index.js",
   "directories": {
@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "standard && tap --tap test/*tests.js"
+    "test": "tap -b test/*.js"
   },
   "repository": {
     "type": "git",
@@ -27,12 +27,10 @@
     "transform"
   ],
   "dependencies": {
-    "readable-stream": "^1.0.33"
+    "readable-stream": "^1.1.13"
   },
   "devDependencies": {
-    "event-stream": "3.0.x",
-    "standard": "^3.6.1",
-    "tap": "0.4.x"
+    "tap": "^1.0.4"
   },
   "engines": {
     "node": ">=0.10"

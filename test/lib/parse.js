@@ -1,4 +1,4 @@
-var lino = require('../')
+var lino = require('../../')
 
 function opts () {
   return { encoding: 'utf8' }

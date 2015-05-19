@@ -5,3 +5,8 @@ node_js:
   - "0.12"
   - "iojs"
   - "node"
+branches:
+  only:
+    - master
+  except:
+    - /^v[0-9]/

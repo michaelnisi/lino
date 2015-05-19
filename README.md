@@ -1,9 +1,8 @@
 # lino - split stream into line sized chunks
 
-The **lino** [Node.js](http://nodejs.org/) module splits streams into line sized chunks.
+The **lino** [Node.js](http://nodejs.org/) package splits streams into line sized chunks.
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/lino.svg)](http://travis-ci.org/michaelnisi/lino)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 ## Usage
 
@@ -11,15 +10,15 @@ The **lino** [Node.js](http://nodejs.org/) module splits streams into line sized
 var lino = require('lino')
 
 var lines = lino()
-lines.on('readable', function () {
-  console.log('%s', lines.read())
-})
+
 lines.write('Chunks are buffered until the ')
 lines.write('the first newline character ')
 lines.write('is encountered.\n')
 lines.write('No characters are removed.\n')
-lines.write('At the end the buffer ')
-lines.end('is flushed.')
+lines.write('At the end, the rest ')
+lines.end('gets flushed.')
+
+lines.pipe(process.stdout)
 ```
 
 ## API
